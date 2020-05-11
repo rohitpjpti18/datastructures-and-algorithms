@@ -1,7 +1,28 @@
+/*
+NPTEL-Design and analysis of Algorithms
+Topic-Negative edge weights: Bellman-Ford algorithm
+https://www.youtube.com/watch?v=YbbGemzQ5ok&list=PL3pGy4HtqwD0ooUPM_0fLASrcXYWxL_Ry&index=26
+
+SUDO CODE
+<!--
+function BellmanFord(s) // source s, with -ve weights
+    for i = 1 to n
+        distance[i] = infinity
+
+    distance[s] = 0
+
+    for i=1 to n-1 // repeat n-1 times
+        for each edge(j, k) in E
+            distance = min(distance(k), distance(j) + weight(j,k))
+-->
+*/
+
 #include<iostream>
 #include<vector>
 using namespace std;
 
+
+// return the infinity value with respect to graph
 long computeInfinity(vector<vector<long>> &graph){
     long total=0;
     for(long i = 0; i<graph.size(); i++){
@@ -13,6 +34,8 @@ long computeInfinity(vector<vector<long>> &graph){
     return total;
 }
 
+
+// bellman-ford algorithm
 vector<long> bellmanFordAlgorithm(vector<vector<long>> &graph, long startIndex) {
     long infinity = computeInfinity(graph);
     vector<long> distance(graph.size(), infinity);

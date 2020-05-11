@@ -1,8 +1,28 @@
+/*
+NPTEL-Design and Analysis of Algorithms
+Topic-Single source shortest paths: Dijkstras algorithm
+https://www.youtube.com/watch?v=OGsPQy-lM1w&list=PL3pGy4HtqwD0ooUPM_0fLASrcXYWxL_Ry&index=25
+
+SUDO CODE
+<!--
+function ShortestPaths(s) // assume source is s
+    for i = 1 to n
+        visited[i] = false; distance[i] = infinity;
+
+    distance[s] = 0
+
+    for i = 1 to n
+        choose u such that visited[u] == false and distance[u] is minimum
+        visited[u] = true
+        for each edge (u, v) with visited[v] == false
+            if distance[v] > distance[u] + weight(u, v)
+                distance[v] = distance[u] + weight(u, v)
+*/
+
 #include<iostream>
 #include<vector>
 #include<algorithm>
 using namespace std;
-
 
 // return the infinity value with respect to graph
 long computeInfinity(vector<vector<long>> &graph){
@@ -16,7 +36,6 @@ long computeInfinity(vector<vector<long>> &graph){
     return total;
 }
 
-
 // return value for u such that visited[u] == false and distance[u] is minimum
 long findAppropiateNode(vector<long> &distance, vector<bool> &visited, long infinity){
     long minimum = infinity;
@@ -29,7 +48,6 @@ long findAppropiateNode(vector<long> &distance, vector<bool> &visited, long infi
     }
     return minIndex;
 }
-
 
 // dijkstras algorithm
 vector<long> dijkstraAlgorithm(vector<vector<long>> &graph, long startIndex){

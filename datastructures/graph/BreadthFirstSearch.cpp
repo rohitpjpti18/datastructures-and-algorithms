@@ -1,8 +1,32 @@
+/*
+NPTEL-Design and Analysis of Algorithms
+Topic-Breadth first search (BFS)
+https://www.youtube.com/watch?v=ahXszIXr1NE&list=PL3pGy4HtqwD0ooUPM_0fLASrcXYWxL_Ry&index=20
+
+SOURCE CODE
+<!--
+function BFS(i) // BFS starting from vertex i
+    //Initialization
+    for j = 1...n {visited[j] = 0}; Q = []
+
+    //Starting the exploration at i
+    visited[i] = 1; append(Q, i);
+
+    //Explore each vertex in Q
+    while Q is not empty
+        j = extract_head(Q)
+        for each (j,k) in E
+            if visited[k] == 0
+                visited[k] = 1; append(Q, k)
+-->
+*/
+
 #include<iostream>
 #include<vector>
 #include<queue>
 using namespace std;
 
+// BFS algorithm
 vector<int> breadthFirstSearch(vector<vector<int>> graph, int startingIndex=0){
     queue<int> q;
     int value;
