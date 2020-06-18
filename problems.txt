@@ -1,0 +1,28 @@
+general problems:
+    single number
+    happy number
+    maximum subarray
+
+dynamic programming problems
+---------------------------------
+    fibonacci series: DONE
+    longest common subsequence: DONE
+    longest increasing subsequence
+    edit distance
+    minimum partition
+    ways to cover a distance 
+    longest path in matrix
+    subset sum problems
+    optimal strategy for a game
+    0-1 knapsack problems
+    boolean parenthesization problem
+    shortest common supersequence
+    matrix chain multiplication
+    partition problem
+    rod cutting
+    coin change problem
+    word break problem
+    maximal product when cutting rope
+    dice throw problem
+    box stacking 
+    egg dropping puzzle
