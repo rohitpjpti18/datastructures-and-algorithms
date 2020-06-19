@@ -1,7 +1,11 @@
+// Use dynamic programming to get the best result
+// time complexity: O(n^2)
+// space complexity: O(n)
 #include<iostream>
 #include<vector>
 using namespace std;
 
+// longest increasing subsequence
 int lis(vector<int> &arr, int size){
     vector<int> lisArr(size, -1);
 
@@ -19,26 +23,28 @@ int lis(vector<int> &arr, int size){
 }
 
 void testLis(){
-    vector<int> arr{10, 22, 9, 33, 21, 50, 41, 60, 80};
-    int result = lis(arr, arr.size());
+    int result;
     int output = true;
 
+    // test case 1
+    vector<int> arr{10, 22, 9, 33, 21, 50, 41, 60, 80};
+    result = lis(arr, arr.size());
     if(result != 6){
         cout<< "failed: expected 6 got " << result << endl;
         output = false;
     }
 
+    // test case 2
     vector<int> testArr1{2, 1, 3, 4, 9, 7, 8};
     result = lis(testArr1, testArr1.size());
-    
     if(result != 5){
         cout<< "failed: expected 5 got " << result << endl;
-        output = false; 
+        output = false;
     }
 
     if(output){
         cout<< "OK.... all test cases passed"<< endl;
-    }     
+    }
 }
 
 int main(){
