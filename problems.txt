@@ -7,10 +7,10 @@ dynamic programming problems
 ---------------------------------
     fibonacci series: DONE
     longest common subsequence: DONE
-    longest increasing subsequence
-    edit distance
+    longest increasing subsequence: DONE
+    edit distance: DONE
     minimum partition
-    ways to cover a distance 
+    ways to cover a distance
     longest path in matrix
     subset sum problems
     optimal strategy for a game
@@ -24,5 +24,5 @@ dynamic programming problems
     word break problem
     maximal product when cutting rope
     dice throw problem
-    box stacking 
+    box stacking
     egg dropping puzzle
