@@ -20,7 +20,6 @@ vector<vector<long>> computeEdges(vector<long> employeeManager){
     return edges;
 }
 
-
 void depthFirstSearch(long source){
     visited[source] = true;
 
