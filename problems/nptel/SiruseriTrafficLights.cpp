@@ -88,19 +88,19 @@ class dijkstras{
 	vector<vector<pair<long, long>>> edges; 
 	
 	public:
-    	dijkstras(long size, long source, long destination){
-		this->size = size;
-		this->source = source;
-		this->destination = destination;
-		this->timePeriod = vector<long>(size);
-		this->visited = vector<long>(size, -1);
-		this->distance = vector<long>(size, INT32_MAX);
-		this->canMove = vector<long>(size, INT32_MAX);
-		this->edges = vector<vector<pair<long, long>>>(size);
+    	dijkstras(long s, long so, long dest){
+		size = s;
+		source = so;
+		destination = dest;
+		timePeriod = vector<long>(size);
+		visited = vector<long>(size, -1);
+		distance = vector<long>(size, INT32_MAX);
+		canMove = vector<long>(size, INT32_MAX);
+		edges = vector<vector<pair<long, long>>>(size);
 	}
 
 	void printDistance(){
-		for(auto i: this->distance)
+		for(auto i: distance)
 			cout<< i << endl;
 	}
 
@@ -125,7 +125,7 @@ class dijkstras{
 	public:
 	void inputTimePeriod(){
 		for(int i = 0; i<size; i++)
-			cin>> this->timePeriod[i];
+			cin>> timePeriod[i];
 	}
 
 	void inputEdges(long m){
@@ -135,12 +135,13 @@ class dijkstras{
 			cin>> v;
 			cin>> weight;
 			u--; v--;
-			this->edges[u].push_back(pair<long, long>(v, weight));
+			edges[u].push_back(pair<long, long>(v, weight));
+			edges[v].push_back(pair<long, long>(u, weight));
 		}
 	}
 
 	void printEdges(){
-		for(auto i: this->edges){
+		for(auto i: edges){
 			for(auto j: i){
 				cout<< j.first << " " << j.second << endl;
 			}
@@ -152,14 +153,14 @@ class dijkstras{
 	}
 
 	void dijkstrasAlgorithm(){
-		this->distance[this->source] = 0;
-		this->canMove[this->source] = 0;
+		distance[source] = 0;
+		canMove[source] = 0;
 
 		// cout<< " worked till here \n";
-		for(long i = 0; i<this->size; i++){
+		for(long i = 0; i<size; i++){
 			long n = getAppropiateNode();
 			// cout << "get Node worked " << n << endl;
-			this->visited[n] = 1;
+			visited[n] = 1;
 			for(long i = 0; i<edges[n].size(); i++){
 				long neighbour = edges[n][i].first;
 				long weight = edges[n][i].second;
@@ -188,7 +189,7 @@ int main(){
 	
 	// d.printEdges();
 	d.dijkstrasAlgorithm();
-	cout<< 	d.getDistance(destination-1);
+	cout<< d.getDistance(destination-1) << endl;
 
 	return 0;
 }
