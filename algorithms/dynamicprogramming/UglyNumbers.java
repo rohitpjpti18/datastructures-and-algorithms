@@ -1,3 +1,5 @@
+package algorithms.dynamicprogramming;
+
 // question link: https://www.geeksforgeeks.org/ugly-numbers/
 
 import java.util.Scanner;
