@@ -5,7 +5,7 @@
  * the miner can move to the cell diagonally up towards the right or right or diagonally 
  * down towards the right. Find out maximum amount of gold he can collect.
  */
-package algorithms.dynamicprogramming;
+package algorithms.dynamicprogramming.java;
 
 import java.util.*;
 

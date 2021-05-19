@@ -1,4 +1,4 @@
-package algorithms.dynamicprogramming;
+package algorithms.dynamicprogramming.java;
 
 // question link: https://www.geeksforgeeks.org/ugly-numbers/
 

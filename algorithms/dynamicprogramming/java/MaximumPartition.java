@@ -1,4 +1,4 @@
-package algorithms.dynamicprogramming;
+package algorithms.dynamicprogramming.java;
 
 import java.util.*;
 import java.lang.*;
