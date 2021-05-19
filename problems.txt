@@ -9,10 +9,10 @@ dynamic programming problems
     longest common subsequence: DONE
     longest increasing subsequence: DONE
     edit distance: DONE
-    minimum partition
+    minimum partition : DONE
     ways to cover a distance: DONE
     longest path in matrix
-    subset sum problems
+    subset sum problems : DONE
     optimal strategy for a game
     0-1 knapsack problems
     boolean parenthesization problem
@@ -27,4 +27,5 @@ dynamic programming problems
     box stacking
     egg dropping puzzle
     triangular pyramid: DONE
+    gold Mine problem: DONE
     staircase Problem: DONE
