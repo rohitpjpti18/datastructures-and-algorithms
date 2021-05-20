@@ -19,7 +19,7 @@ dynamic programming problems
     shortest common supersequence
     matrix chain multiplication
     partition problem
-    rod cutting
+    rod cutting: DONE
     coin change problem
     word break problem
     maximal product when cutting rope
