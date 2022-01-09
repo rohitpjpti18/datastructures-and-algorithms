@@ -744,7 +744,7 @@ public class Solution {
         int upper = n;
 
         while(lower<=upper){
-            boolean mid = isBadVersion((lower+upper)/2);
+            boolean mid = false; //isBadVersion((lower+upper)/2);
 
             if(!mid)
                 lower = ((lower+upper)/2) + 1;
@@ -756,6 +756,136 @@ public class Solution {
 
         return lower;
     }
+
+
+    // https://leetcode.com/problems/implement-strstr/
+    public int strStr(String haystack, String needle) {
+        return haystack.indexOf(needle);
+    }
+
+    // https://leetcode.com/problems/move-zeroes/
+    public void moveZeroes(int[] nums) {
+        int[] tempArr = new int[nums.length];
+
+        Arrays.fill(tempArr, 0);
+
+        int count = 0;
+        for(int i = 0; i<tempArr.length; i++){
+            if(nums[i] != 0){
+                tempArr[count] = nums[i];
+                count++;
+            }
+        }
+
+        for(int i =0; i<tempArr.length; i++){
+            nums[i] = tempArr[i];
+        }
+    }
+
+    // https://leetcode.com/problems/word-pattern/
+    public boolean wordPattern(String pattern, String s) {
+        String[] words = s.split(" ");
+
+        Map<Character, String> str = new HashMap<Character, String>();
+
+
+        if(pattern.length() != words.length){
+            return false;
+        }
+
+        for(int i = 0; i<pattern.length(); i++){
+            if(!str.containsKey(pattern.charAt(i))){
+                str.put(pattern.charAt(i), words[i]);
+            }else if(!str.get(pattern.charAt(i)).equals(words[i])){
+                return false;
+            }
+        }
+
+        List<String> a = (ArrayList<String>) str.values();
+
+        Set<String> e = new HashSet<String>(a);
+
+
+
+        return a.size() != e.size();
+    }
+
+    // https://leetcode.com/problems/range-sum-query-immutable/
+    class NumArray {
+        private List<Integer> numsArr;
+        public NumArray(int[] nums) {
+            numsArr = new ArrayList<Integer>();
+            for(int i = 0 ; i<nums.length; i++){
+                numsArr.add(nums[i]);
+            }
+        }
+        
+        public int sumRange(int left, int right) {
+            List<Integer> sumstr = numsArr.subList(left, right+1);
+            int sum = 0;
+
+            for(Integer i: sumstr){
+                sum += i;
+            }
+
+            return sum;
+        }
+    }
+
+    // https://leetcode.com/problems/power-of-three/
+    public boolean isPowerOfThree(int n) {
+        if(n<=0){
+            return false;
+        }
+        while(n != 1){
+            if(n%3 == 0){
+                n = n/3;
+            }else{
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    // https://leetcode.com/problems/counting-bits/
+    public int[] countBits(int n) {
+        int[] ans = new int[n+1];
+
+        for(int i = 0; i<n+1; i++){
+            ans[i] = Integer.bitCount(i);
+        }
+
+        return ans;
+    }
+
+    // https://leetcode.com/problems/power-of-four/
+    public boolean isPowerOfFour(int n) {
+        if(n<=0){
+            return false;
+        }
+        while(n != 1){
+            if(n%4 == 0){
+                n = n/4;
+            }else{
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // https://leetcode.com/problems/reverse-string/
+    public void reverseString(char[] s) {
+        for(int i = 0; i<s.length/2; i++){
+            char temp = s[i];
+            s[i] = s[s.length-1-i];
+            s[s.length-1-i] = temp;
+        }
+    }
+
 }
+
 
 
