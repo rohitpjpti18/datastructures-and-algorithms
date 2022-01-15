@@ -114,6 +114,31 @@ public class Solution {
         return s.substring(startIndex, lastIndex+1);
     }
 
+    // https://leetcode.com/problems/rotate-array/
+    public void rotate(int[] nums, int k) {
+        int numOfRotations = k%nums.length;
+        
+        int ptr = nums.length - numOfRotations;
+
+        int[] temp = new int[ptr];
+
+        for(int i = 0; i<ptr; i++){
+            temp[i] = nums[i];
+        }
+
+        int start = 0;
+        for(int i = ptr; i<nums.length; i++){
+            nums[start] = nums[i];
+            start++;
+        }
+
+        for(int i = 0; i<temp.length ; i++){
+            nums[start] = temp[i];
+            start++;
+        }
+
+    }
+
 
 
 }

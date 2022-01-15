@@ -1,9 +1,9 @@
 package problems.leetcode.easy;
 
+import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class Solution {
     class ListNode {
@@ -740,21 +741,20 @@ public class Solution {
 
     // https://leetcode.com/problems/first-bad-version/
     public int firstBadVersion(int n) {
-        int lower = 1;
-        int upper = n;
+        long lower = 0;
+        long upper = n-1;
 
         while(lower<=upper){
-            boolean mid = false; //isBadVersion((lower+upper)/2);
+            long mid = (lower+upper)/2;
+            boolean midBG = false; //isBadVersion((int)mid);
 
-            if(!mid)
-                lower = ((lower+upper)/2) + 1;
+            if(!midBG)
+                lower = mid + 1;
             else
-                upper = ((lower+upper)/2) - 1;
+                upper = mid - 1;
         }
 
-        
-
-        return lower;
+        return (int) lower;
     }
 
 
@@ -883,6 +883,410 @@ public class Solution {
             s[i] = s[s.length-1-i];
             s[s.length-1-i] = temp;
         }
+    }
+
+    // https://leetcode.com/problems/reverse-vowels-of-a-string/
+    public String reverseVowels(String s) {
+        List<Character> vowelChars = new ArrayList<Character>();
+        vowelChars.add('a');
+        vowelChars.add('e');
+        vowelChars.add('i');
+        vowelChars.add('o');
+        vowelChars.add('u');
+        vowelChars.add('A');
+        vowelChars.add('E');
+        vowelChars.add('I');
+        vowelChars.add('O');
+        vowelChars.add('U');
+
+        List<Character> vowels = new ArrayList<Character>();
+
+        for(int i = 0; i<s.length(); i++){
+            if(vowelChars.contains(s.charAt(i))){
+                vowels.add(s.charAt(i));
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i<s.length(); i++){
+            if(vowelChars.contains(s.charAt(i))){
+                sb.append(vowels.remove(vowels.size()-1));
+            }else{
+                sb.append(s.charAt(i));
+            }
+        }
+
+        return sb.toString();
+    }
+
+    // https://leetcode.com/problems/intersection-of-two-arrays/
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> s = new HashSet<Integer>();
+        Set<Integer> s1 = new HashSet<Integer>();
+        
+        for(int i = 0; i<nums1.length; i++){
+            s.add(nums1[i]);
+        }
+        for(int i = 0; i<nums2.length; i++){
+            if(s.contains(nums2[i])){
+                s1.add(nums2[i]);
+            }
+        }
+
+        int[] result = new int[s1.size()];
+        List<Integer> a = new ArrayList<Integer>(s1);
+        for(int i = 0; i<result.length; i++){
+            result[i] = a.get(i);
+        }
+        return result;
+    }
+
+    /*
+    // https://leetcode.com/problems/intersection-of-two-arrays-ii/
+    public int[] intersect(int[] nums1, int[] nums2) {
+        
+    }
+    */
+
+    // https://leetcode.com/problems/valid-perfect-square/
+    public boolean isPerfectSquare(int num) {
+        long left = 1;
+        long right = num;
+
+        if(num == 1){
+            return true;
+        }
+
+        while(left<=right){
+
+            long mid = (left+right)/2;
+
+            if(mid*mid == num)
+                return true;
+
+            //System.out.println(Long.toString(mid));
+
+            if(mid*mid > num){
+                right = mid -1;
+            }else{
+                left = mid + 1;
+            }
+        }
+
+        return false;
+    }
+
+    // https://leetcode.com/problems/guess-number-higher-or-lower/
+    public int guessNumber(int n) {
+        long left = 1;
+        long right = n;
+
+        while(left <= right){
+            long mid = (left+right)/2;
+            
+            int myGuess = 0; // guess((int)mid);
+            if(myGuess == 0){
+                return (int)mid;
+            }
+
+            if(myGuess == -1){
+                right = mid - 1;
+            }else{
+                left = mid + 1;
+            }
+        }
+
+        return -1;
+    }
+
+
+    // https://leetcode.com/problems/first-unique-character-in-a-string/
+    public int firstUniqChar(String s) {
+        int[][] arr = new int[2][26];
+
+        Arrays.fill(arr[0], 0);
+        Arrays.fill(arr[1], 0);
+
+        for(int i = 0; i<s.length(); i++){
+            arr[0][s.charAt(i)-'a'] = i;
+            arr[1][s.charAt(i)-'a']++;
+        }
+
+        int lowestIndex = Integer.MAX_VALUE;
+        for(int i = 0; i<s.length(); i++){
+            if(arr[1][s.charAt(i)-'a'] == 1 && arr[0][s.charAt(i)-'a'] < lowestIndex){
+                lowestIndex = arr[0][s.charAt(i)-'a'];
+            }
+        }
+
+        return lowestIndex == Integer.MAX_VALUE ? -1 : lowestIndex;
+    }
+
+    // https://leetcode.com/problems/find-the-difference/
+    public char findTheDifference(String s, String t) {
+        int[] arr1 = new int[26];
+        int[] arr2 = new int[26];
+
+        Arrays.fill(arr1, 0);
+        Arrays.fill(arr2, 0);
+
+        for(char i: s.toCharArray()){
+            arr1[i - 'a']++; 
+        }
+        for(char i: t.toCharArray()){
+            arr2[i - 'a']++;
+        }
+
+        for(int i = 0;i<26; i++){
+            if(arr1[i] != arr2[i]){
+                return (char)('a'+i);
+            }
+        }
+
+        return 'A';
+    }
+
+    // https://leetcode.com/problems/is-subsequence/
+    public boolean isSubsequence(String s, String t) {
+        int ptr1 = 0;
+        int ptr2 = 0;
+        
+        for(int i =0; i<t.length(); i++){
+            if(ptr1 < s.length() && s.charAt(ptr1) == t.charAt(ptr2)){
+                ptr1++;
+            }
+            ptr2++;
+        }
+
+        return ptr1 >= s.length();
+    }
+
+
+    public List<String> readBinaryWatch(int turnedOn) {
+        List<String> result = new ArrayList<String>();
+
+        for(int i = 0; i<12; i++){
+            if(Integer.bitCount(i)>turnedOn) continue;
+            for(int j = 0; j < 60; j++){
+                if(Integer.bitCount(j) + Integer.bitCount(i) == Integer.bitCount(turnedOn)){
+                    if(j<10){
+                        result.add(Integer.toString(i)+":0"+Integer.toString(j)); 
+                    }else{
+                        result.add(Integer.toString(i)+":"+Integer.toString(j));
+                    }
+
+                }
+            }
+        }
+
+        return result;
+    }
+
+    // https://leetcode.com/problems/sum-of-left-leaves/
+    private int sum;
+    public void sumOfLeftLeaves2(TreeNode node){
+        if(node!=null){
+            if(node.left != null && node.left.left == null && node.left.right == null){
+                this.sum += node.left.val;
+            }
+            sumOfLeftLeaves2(node.left);
+            sumOfLeftLeaves2(node.right);
+        }
+    }
+
+    public int sumOfLeftLeaves(TreeNode root) {
+        //nteger sum = 0;
+        this.sum = 0;
+        sumOfLeftLeaves2(root);   
+        return this.sum;
+    }
+
+    public String toHex(int num) {
+        return Integer.toHexString(num);
+    }
+
+    public int longestPalindrome(String s) {
+        int[] charCount = new int[128];
+
+        Arrays.fill(charCount, 0);
+
+        for(int i = 0; i<s.length(); i++){
+            charCount[s.charAt(i)]++;
+        }
+
+        int result = 0;
+        for(int i = 0; i<128; i++){
+            if(charCount[i]%2 == 0){
+                result += charCount[i];
+                charCount[i] = 0;
+            }else{
+                result += charCount[i] -1;
+                charCount[i] = 1;
+            }
+        }   
+
+        for(int i = 0; i<128; i++){
+            if(charCount[i] == 1){
+                result+=1;
+                break;
+            }
+        }
+        return result;
+    }
+
+    // https://leetcode.com/problems/fizz-buzz/
+    public List<String> fizzBuzz(int n) {
+        List<String> ans = new ArrayList<String>();
+        for(int i = 1; i<= n; i++){
+            if(i%3 == 0 && i%5 == 0){
+                ans.add("FizzBuzz");
+            }else if(i%3 == 0){
+                ans.add("Fizz");
+            }else if(i%5 == 0){
+                ans.add("Buzz");
+            }else{
+                ans.add(Integer.toString(i));
+            }
+        }
+
+        return ans;
+    }
+
+    // https://leetcode.com/problems/third-maximum-number/
+    public int thirdMax(int nums[]) {
+        Set<Integer> s = new HashSet<Integer>();
+        for(int i = 0;i<nums.length; i++){
+            s.add(nums[i]);
+        }
+
+        List<Integer> a = new ArrayList<Integer>(s);
+        Collections.sort(a, Collections.reverseOrder());
+
+        if(a.size()<3){
+            return a.get(0);
+        }else{
+            return a.get(2);
+        }
+    }
+
+    // https://leetcode.com/problems/binary-search/
+    public int search(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length-1;
+
+        while(low<=high){
+            int mid = (low+high)/2;
+
+            if(nums[mid] == target){
+                return mid;
+            }
+
+            if(nums[mid] > target){
+                high = mid -1;
+            }else{
+                low = mid+1;
+            }
+        }
+
+        return -1;
+    }
+
+    // https://leetcode.com/problems/search-insert-position/
+    public int searchInsert(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length-1;
+
+        while(low<=high){
+            int mid = (low+high)/2;
+
+            if(nums[mid] == target){
+                return mid;
+            }
+
+            if(nums[mid] > target){
+                high = mid -1;
+            }else{
+                low = mid+1;
+            }
+        }
+        if(low == nums.length){
+            return nums.length;
+        }
+        return high;
+    }
+
+    // https://leetcode.com/problems/squares-of-a-sorted-array/
+    public int[] sortedSquares(int[] nums) {
+        for(int i = 0;i<nums.length; i++){
+            nums[i] = Math.abs(nums[i]);
+        }
+        Arrays.sort(nums);
+        for(int i = 0; i<nums.length; i++){
+            nums[i] = nums[i]*nums[i];
+        }
+
+        return nums;
+    }
+
+    // https://leetcode.com/problems/add-strings/
+    public String addStrings(String num1, String num2) {
+        BigInteger a = new BigInteger(num1);
+        BigInteger b = new BigInteger(num2);
+
+        return a.add(b).toString(10);
+    }
+
+    public String addString(String num1, String num2){
+        int[] arrA = new int[num1.length()];
+        int[] arrB = new int[num2.length()];
+
+        for(int i = 0; i<num1.length(); i++){
+            arrA[i] = Integer.parseInt(String.valueOf(num1.charAt(i)));
+        }
+
+        for(int i = 0; i<num2.length(); i++){
+            arrB[i] = Integer.parseInt(String.valueOf(num2.charAt(i)));
+        }
+
+
+        int carry = 0;
+
+
+
+
+    }
+
+    // https://leetcode.com/problems/number-of-segments-in-a-string/
+    public int countSegments(String s) {
+        String tempStr = s.replaceAll("( +)", " ").trim();
+        
+        if(tempStr.equals("")) return 0;
+        
+        int count = 0;
+        for(Character i: tempStr.toCharArray()){
+            if(i == ' ') count++;
+        }
+        
+        return ++count;
+    }
+
+    // https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> result = new ArrayList<Integer>();
+        
+        int[] arr = new int[nums.length];
+        Arrays.fill(arr, 0);
+        
+        for(int i = 0; i<nums.length; i++){
+            arr[nums[i]-1]++;
+        }
+        
+        for(int i = 0; i<arr.length; i++){
+            if(arr[i] == 0)
+                result.add(i+1);
+        }
+        
+        return result;
     }
 
 }
