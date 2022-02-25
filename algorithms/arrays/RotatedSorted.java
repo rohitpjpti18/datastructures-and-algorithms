@@ -1,8 +1,6 @@
 package algorithms.arrays;
 
 import java.util.*;
-import java.math.*;
-import java.lang.*;
 
 public class RotatedSorted {
 

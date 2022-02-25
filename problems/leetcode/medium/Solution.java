@@ -2,6 +2,7 @@ package problems.leetcode.medium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,7 +58,6 @@ public class Solution {
 
         return sb.toString().replaceAll("( +)"," ").trim();
     }
-
 
     // https://leetcode.com/problems/longest-palindromic-substring/
     public String longestPalindrome(String s) {
@@ -139,6 +139,102 @@ public class Solution {
 
     }
 
+    // https://leetcode.com/problems/string-to-integer-atoi/
+    public int myAtoi(String s) {
+        s = s.trim();
+        
+        if(s.length() == 0) return 0;
+        
+        int signMultiplier = 1;
+        int start = 0;
+        if(signMultiplier == '-'){
+            signMultiplier = -1;
+            start = 1;
+        }else if(signMultiplier == '+'){
+            signMultiplier = 1;
+            start = 1;
+        }
+        
+        int result = 0;
+        
+        for(int i = 0; i<s.length(); i++){
+            if(!(s.charAt(i) >= '0' && s.charAt(i) <= '9')){
+                return result*signMultiplier;
+            }
+            
+            result = result*10 + int(s.charAt(i) - '0')
+                
+            if(result*signMultiplier <= Integer.MIN_VALUE) return Integer.MIN_VALUE;
+            else if(result*signMultiplier >= Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        }
+        
+        return result*signMultiplier;
+    }
 
+    // https://leetcode.com/problems/3sum/
+    public List<List<Integer>> threeSum(int[] nums) {
+        int left;
+        int right;
+        
+        Arrays.sort(nums);
 
+        Set<List<Integer>> result = new HashSet<>();
+        if(nums.length < 3){
+            return new ArrayList<>(result);   
+        }
+        for(int current = 0; current<nums.length-2; current++){
+            left = current+1;
+            right = nums.length-1;
+            while(left<right){
+                int threeSum = nums[current] + nums[left] + nums[right];
+                if(threeSum == 0){
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(nums[current]);
+                    temp.add(nums[left]);
+                    temp.add(nums[right]);
+
+                    result.add(temp);
+                    
+                    left++;
+
+                    while(left<right && nums[left] == nums[left-1]){
+                        left++;
+                    }
+                }
+                if(threeSum > 0){
+                    right--;
+                }
+                if(threeSum < 0){
+                    left++;
+                }
+            }
+        }
+        
+
+        return new ArrayList<>(result);        
+    }
+
+    public Integer threeSumCloset(int[] nums, target){
+        int left;
+        int right;
+        int output = Integer.MAX_INT;
+
+        for(int current = 0; current<nums.length-2; current++){
+            left = current+1;
+            right = nums.length-1;
+
+            while(left<right){
+                int currentVal = nums[left] + nums[right] + nums[current];
+
+                if(currentVal - target == 0)
+                    return currentVal;
+
+                if(Math.abs(currentVal - target) < Math.abs(output-target)){
+                    output = currentVal;
+                }
+
+                if(currentVal - target < )
+            }
+        }
+    }
 }

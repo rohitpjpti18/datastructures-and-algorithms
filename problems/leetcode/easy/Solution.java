@@ -1236,26 +1236,6 @@ public class Solution {
         return a.add(b).toString(10);
     }
 
-    public String addString(String num1, String num2){
-        int[] arrA = new int[num1.length()];
-        int[] arrB = new int[num2.length()];
-
-        for(int i = 0; i<num1.length(); i++){
-            arrA[i] = Integer.parseInt(String.valueOf(num1.charAt(i)));
-        }
-
-        for(int i = 0; i<num2.length(); i++){
-            arrB[i] = Integer.parseInt(String.valueOf(num2.charAt(i)));
-        }
-
-
-        int carry = 0;
-
-
-
-
-    }
-
     // https://leetcode.com/problems/number-of-segments-in-a-string/
     public int countSegments(String s) {
         String tempStr = s.replaceAll("( +)", " ").trim();
@@ -1286,9 +1266,117 @@ public class Solution {
                 result.add(i+1);
         }
         
+        
         return result;
     }
 
+    // https://leetcode.com/problems/number-complement/
+    public int findComplement(int num) {
+        String binaryNum = Integer.toBinaryString(num);
+        
+        StringBuilder sb = new StringBuilder();
+        for(Character i: binaryNum.toCharArray()){
+            if(i == '0'){
+                sb.append("1");
+            }else{
+                sb.append("0");
+            }
+        }
+        
+        return Integer.parseInt(sb.toString(), 2);
+    }
+
+    // https://leetcode.com/problems/island-perimeter/
+    public int islandPerimeter(int[][] grid) {
+        int perimeter = 0;
+        
+        for(int i = 0; i<grid.length; i++){
+            for(int j = 0; j<grid[i].length; j++){
+                if(grid[i][j] == 1){
+                    perimeter += 4;
+                    if(i>0 && grid[i-1][j] == 1)
+                        perimeter--;
+                    if(i<grid.length-1 && grid[i+1][j] == 1)
+                        --perimeter;
+                    if(j>0 && grid[i][j-1] == 1)
+                        --perimeter;
+                    if(j<grid[i].length-1 && grid[i][j+1] == 1)
+                        --perimeter;                
+                } 
+            }
+        }
+        
+        return perimeter;
+    }
+
+    // https://leetcode.com/problems/license-key-formatting/
+    public String licenseKeyFormatting(String s, int k) {
+        String newS = s.replace("-", "");
+        
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        
+        for(int i = newS.length()-1; i>= 0; i--){
+            if(count == k){
+                sb.append("-");
+                count = 0;
+            }
+            sb.append(Character.toUpperCase(newS.charAt(i)));
+            count++;
+        }
+        
+        
+        return sb.reverse().toString();
+    }
+
+    // https://leetcode.com/problems/max-consecutive-ones/
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int maxNums = 0;
+        int currentNums = 0;
+        
+        
+        for(int i=0; i<nums.length; i++){
+            if(nums[i] == 0){
+                maxNums = Math.max(maxNums, currentNums);
+                currentNums = 0;
+            }else{
+                currentNums++;
+            }
+        }
+        
+        maxNums = Math.max(maxNums, currentNums);
+        
+        return maxNums;
+    }
+
+    // https://leetcode.com/problems/construct-the-rectangle/
+    public int[] constructRectangle(int area) {
+        int sqroot = (int)Math.sqrt(area);
+        
+        for(int i = sqroot; i>0; i--){
+            if(i*(area/i) == area){
+                return new int[]{area/i,i};
+            }
+        }
+        
+        return null;
+    }
+
+    // https://leetcode.com/problems/teemo-attacking/submissions/
+    public int findPoisonedDuration(int[] timeSeries, int duration) {
+        int timeDuration = 0;
+        int poisedTill = 0;
+        
+        for(int i = 0; i<timeSeries.length; i++){
+            if(poisedTill >= timeSeries[i]){
+                timeDuration -= poisedTill - timeSeries[i];
+            }
+            poisedTill = timeSeries[i] + duration;
+            timeDuration += duration;
+        }
+        
+        return timeDuration;
+    }
 }
 
 

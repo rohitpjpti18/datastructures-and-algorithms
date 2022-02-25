@@ -18,7 +18,7 @@ complete item or don’t pick it (0-1 property)
 using namespace std;
 
 
-long knapsack01(long size, long targetweight, vector<long> weights, vector<long> profits){
+long knapsack01(int size, int targetweight, vector<long> weights, vector<long> profits){
     vector<pair<long, long>> items;
     for(long i = 0; i<size; i++){
         pair<long, long> temp;

@@ -1,3 +1,5 @@
+package datastructures.arrays;
+
 class RotatedSorteArray{
 
     // returns index at which the valueToFind is present in arr, returns -1 otherwise;
@@ -26,7 +28,9 @@ class RotatedSorteArray{
                 return left;
             }
             if(right-left == 1){
-                if(arr[left] == ;
+                if(arr[left] == 1){
+
+                }
             }
 
             if(arr[center] < arr[center-1] && arr[center] < arr[center+1]){
@@ -37,6 +41,7 @@ class RotatedSorteArray{
                 left = center + 1;
             }
         }
+        return 0;
     }
 
 
