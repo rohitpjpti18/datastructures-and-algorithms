@@ -23,7 +23,7 @@ public class RotatedSorted {
         return (long) -1;
     }
 
-    //  2 3 4 5 6 7 8 9 10 11 12 1
+    //  6 7 8 9 10 11 12 1 2 3 4 5
     // to find the dividing point in the array.
     public static long specialBinary(Vector<Long> arr){
         int left = 0, right = arr.size()-1, mid;

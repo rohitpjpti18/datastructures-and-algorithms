@@ -1,5 +1,6 @@
 package problems.leetcode.medium;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -214,6 +215,7 @@ public class Solution {
         return new ArrayList<>(result);        
     }
 
+    /*
     public Integer threeSumCloset(int[] nums, target){
         int left;
         int right;
@@ -237,4 +239,5 @@ public class Solution {
             }
         }
     }
+    */
 }
