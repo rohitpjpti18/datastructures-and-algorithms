@@ -215,6 +215,78 @@ public class Solution {
         return new ArrayList<>(result);        
     }
 
+    // https://leetcode.com/problems/multiply-strings/
+    public String multiply(String num1, String num2) {
+        if(num1.equals("0") || num2.equals("0")) return "0";
+        if(num1.equals("1")) return num2;
+        if(num2.equals("1")) return num1;
+        
+        int[][] ans = new int[num2.length()][num1.length() + num2.length()];
+        int[] result = new int[num1.length() + num2.length()];
+        StringBuilder newNum1 = new StringBuilder(num1);
+        StringBuilder newNum2 = new StringBuilder(num2);
+        
+        newNum1.reverse();
+        newNum2.reverse();
+        
+        num1 = newNum1.toString();
+        num2 = newNum2.toString();
+            
+        int offset = 0;
+        
+        for(int i = 0; i<num2.length(); i++){
+            int carry = 0;
+            for(int j = 0; j<num1.length(); j++){
+                int mul = (num2.charAt(i) - '0')*(num1.charAt(j) - '0');
+                mul+=carry;
+                carry = 0;
+                if(mul > 9){
+                    carry = mul/10;
+                    mul = mul%10;
+                }
+                
+                ans[i][j+offset] = mul;
+            }
+            if(carry>0){
+                ans[i][num1.length()+offset] = carry; 
+            }
+            offset++;
+        }
+        
+        int carry = 0;
+        for(int j = 0; j<ans[0].length; j++){
+            int sum = carry; 
+            for(int i = 0; i<ans.length; i++){
+                sum += ans[i][j];
+            }            
+            if(sum>9){
+                carry = sum/10;
+                sum = sum%10;
+            }else{
+                carry = 0;
+            }
+            
+            result[j] = sum;
+        }
+        
+        //System.out.println(Arrays.toString(result));
+        
+        int startIndex = 0;
+        for(int i = result.length-1; i>-1 ; i--){
+            if(result[i] != 0) {
+                startIndex = i;
+                break;
+            }
+        }
+        
+        StringBuilder r = new StringBuilder();
+        for(int i = startIndex; i>-1; i--){
+            r.append(Integer.toString(result[i]));
+        }
+        
+        return r.toString();
+    }
+
     /*
     public Integer threeSumCloset(int[] nums, target){
         int left;
