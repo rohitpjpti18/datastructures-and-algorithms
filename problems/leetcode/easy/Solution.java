@@ -1377,6 +1377,46 @@ public class Solution {
         
         return timeDuration;
     }
+
+    // https://leetcode.com/problems/reverse-string-ii/
+    public String reverseStr(String s, int k) {
+        char[] arr = s.toCharArray();
+        
+        for(int i = 0; i<arr.length; i += 2*k){
+            int a = i, b = Math.min(i+k-1, arr.length-1);
+        
+            while(a<b){
+                char temp = arr[a];
+                arr[a++] = arr[b];
+                arr[b--] = temp;
+            }
+        }
+        
+        return new String(arr);
+    }
+
+    //https://leetcode.com/problems/reverse-words-in-a-string-iii/
+    public String reverse(String s){
+        char[] a = s.toCharArray();
+        
+        for(int i = 0; i<Math.ceil(a.length/2); i++){
+            char temp = a[i];
+            a[i] = a[a.length-1-i];
+            a[a.length-1-i] = temp;
+        }
+        
+        return new String(a);
+    }
+    
+    public String reverseWords(String s) {
+        String[] words = s.split(" ");
+        
+        for(int i = 0; i<words.length; i++){
+            words[i] = reverse(words[i]);
+        }
+        
+        return String.join(" ", words);
+    }
 }
 
 

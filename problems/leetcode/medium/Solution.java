@@ -287,29 +287,105 @@ public class Solution {
         return r.toString();
     }
 
-    /*
-    public Integer threeSumCloset(int[] nums, target){
-        int left;
-        int right;
-        int output = Integer.MAX_INT;
+    // https://leetcode.com/problems/boats-to-save-people/
+    public int numRescueBoats(int[] people, int limit) {
+        Arrays.sort(people);
+        int left = 0;
+        int right = people.length-1;
+        int result = 0;
+        
+        while(left<=right){
+            if(people[left] + people[right] <= limit)
+                left++;
+            right--;
+            result++;
+        }
+        
+        return result;
+    }
 
-        for(int current = 0; current<nums.length-2; current++){
-            left = current+1;
-            right = nums.length-1;
+    // https://leetcode.com/problems/broken-calculator/
+    public int brokenCalc(int startValue, int target) {
+        int ans = 0;
+        while(target>startValue){
+            ans++;
+            if(target%2==0) target /= 2;
+            else target++;
+        }
+        
+        return ans + startValue - target;
+    }
 
-            while(left<right){
-                int currentVal = nums[left] + nums[right] + nums[current];
-
-                if(currentVal - target == 0)
-                    return currentVal;
-
-                if(Math.abs(currentVal - target) < Math.abs(output-target)){
-                    output = currentVal;
+    // https://leetcode.com/problems/3sum-closest/
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        
+        int result = 0;
+        int minimum = Integer.MAX_VALUE;
+        
+        for(int i = 0; i<nums.length-2; i++){
+            int j = i+1;
+            int k = nums.length - 1;
+            
+            while(j<k){
+                int total = Math.abs(nums[i] + nums[j] + nums[k] - target);
+                
+                if(total ==0) return nums[i]+nums[j]+nums[k];
+                if(total < minimum){
+                    minimum = total;
+                    result = nums[i] + nums[j] + nums[k];
                 }
-
-                if(currentVal - target < )
+                
+                if(nums[i] + nums[j] + nums[k] > target){
+                    k--;
+                }else{
+                    j++;
+                }
             }
         }
+        
+        return result;
     }
-    */
+
+    // https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/
+    public String getSmallest(StringBuilder result, int n, int k){
+        while(n>0){
+            int value = k - (n-1);
+            if(value > 26){
+                result.append("z");
+                k -= ('z' - 'a') + 1;
+            }else{
+                result.append((char)((int)('a') + value - 1));
+                k -= value;
+            }
+            n--;
+        }
+        result.reverse();
+        return result.toString();
+    }
+    public String getSmallestString(int n, int k) {
+        return getSmallest(new StringBuilder(), n, k);
+    }
+
+    // https://leetcode.com/problems/partition-labels/
+    public List<Integer> partitionLabels(String s) {
+        int[] last = new int[26];
+        
+        for(int i = 0; i<s.length(); i++){
+            last[s.charAt(i) - 'a'] = i;
+        }
+        
+        int j = 0, anchor = 0;
+        List<Integer> ans = new ArrayList();
+        for(int i = 0; i<s.length(); i++){
+            j = Math.max(j, last[s.charAt(i)-'a']);
+            
+            if(i == j){
+                ans.add(j-anchor + 1);
+                anchor = i+1;
+            }
+        }
+        
+        return ans;
+    }
 }
