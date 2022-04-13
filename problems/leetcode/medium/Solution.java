@@ -388,4 +388,302 @@ public class Solution {
         
         return ans;
     }
+
+    // https://leetcode.com/problems/two-city-scheduling/
+    public int twoCitySchedCost(int[][] costs) {
+        Arrays.sort(costs, (a, b) -> {
+            int i = a[0] - a[1];
+            int j = b[0] - b[1];
+            
+            return i-j;
+        });
+        
+        int result = 0;
+        for(int i = 0; i<costs.length/2; i++)
+            result += costs[i][0];
+        for(int i = costs.length/2; i<costs.length; i++)
+            result += costs[i][1];
+        
+        return result;
+    }
+
+    // https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/
+    public int minDominoRotations(int[] tops, int[] bottoms) {
+        boolean[][] dice = new boolean[6][tops.length];
+        
+        for(int i = 0; i<tops.length; i++)
+            dice[tops[i]-1][i] = true;
+        
+        for(int i = 0; i<bottoms.length; i++)
+            dice[bottoms[i]-1][i] = true;
+        
+        List<Integer> theValue = new ArrayList();
+        for(int i = 0; i<dice.length; i++){
+            boolean flag = true;
+            for(int j = 0; j<dice[0].length; j++){
+                if(!dice[i][j]){
+                    flag = false;
+                }
+            }
+            if(flag){
+                theValue.add(i+1);
+            }
+        }
+        
+        if(theValue.isEmpty()){
+            return -1;
+        }
+        
+        int countt = 0;
+        int countb = 0;
+        int[] counts = new int[theValue.size()];
+        for(int v = 0; v<theValue.size(); v++){
+            countt = 0; countb = 0;
+            for(int i = 0; i<tops.length; i++){
+                if(tops[i] != theValue.get(v)) countt++;
+                if(bottoms[i] != theValue.get(v)) countb++;
+            }
+            counts[v] = Math.min(countt, countb);
+        }
+        
+        
+        int result = Integer.MAX_VALUE;
+
+        for(int i = 0; i<counts.length; i++){
+            if(counts[i] < result) result = counts[i]; 
+        }
+        
+        return result;
+    }
+
+    // https://leetcode.com/problems/middle-of-the-linked-list/
+    public ListNode middleNode(ListNode head) {
+        ListNode slowPtr;
+        ListNode fastPtr;
+        
+        if(head == null) return null;
+        if(head.next == null) return head;
+        
+        slowPtr = head;
+        fastPtr = head;
+        
+        while(fastPtr != null && fastPtr.next != null){
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next.next;
+        }
+        
+        return slowPtr;
+    }
+
+    // https://leetcode.com/problems/remove-nth-node-from-end-of-list/ 
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        int newCount = 0;
+        ListNode ptr = new ListNode(-1);
+        ptr.next = head;
+        head = ptr;
+        
+        int count = 0;
+        
+        while(ptr!=null){
+            ptr = ptr.next;
+            count++;
+        }
+        ptr=head;
+        
+        while(ptr != null){
+            if(newCount == count-1-n){
+                ptr.next = ptr.next.next;
+                break;
+            }
+            ptr = ptr.next;
+            newCount++;
+        }
+        
+        return head.next;
+    }
+
+    // https://leetcode.com/problems/swap-nodes-in-pairs/
+    public ListNode swapPairs(ListNode head) {
+        if(head == null) return head;
+        if(head.next == null) return head;
+        
+        ListNode newNode = new ListNode(-1);
+        newNode.next = head;
+        head = newNode;
+        
+        ListNode upper = head.next.next;
+        ListNode current = head.next;
+        ListNode lower = head;
+        
+        while(upper != null){
+            ListNode temp = current;
+            current = upper;
+            lower.next = upper;
+            upper = temp;
+            temp.next = current.next;
+            current.next = upper;
+            
+            if(upper.next == null){
+                break;
+            }
+            
+            lower = upper;
+            current = upper.next;
+            upper = upper.next.next;
+        }
+        return head.next;
+    }
+
+
+    // https://leetcode.com/problems/remove-duplicate-letters/
+    public String removeDuplicateLetters(String s) {
+        char[] arr = s.toCharArray();
+        
+        Map<Character, Integer> map = new HashMap();
+        
+        for(int i = 0; i<arr.length; i++){
+            map.put(arr[i], i);
+        }
+        Stack<Character> stack = new Stack<Character>();
+        
+        for(int i = 0; i<arr.length; i++){
+            
+            if(!stack.contains(arr[i])){
+                while(!stack.isEmpty() && stack.peek() > arr[i] && i < map.get(stack.peek())){
+                    stack.pop();
+                }
+                stack.push(arr[i]);
+            }
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        
+        while(!stack.isEmpty()){
+            sb.append(stack.pop());
+        }
+        
+        sb.reverse();
+        return sb.toString();
+    }
+
+
+    // https://leetcode.com/problems/integer-to-roman
+    public String intToRoman(int num) {
+        StringBuilder sb = new StringBuilder();
+        
+        while(num > 0){
+            if(num >= 1000){
+                sb.append("M");
+                num = num - 1000;
+                continue;
+            }if(num >= 900){
+                sb.append("CM");
+                num = num - 900;
+                continue;
+            }if(num >= 500){
+                sb.append("D");
+                num = num - 500;
+                continue;
+            }if(num >= 400){
+                sb.append("CD");
+                num = num - 400;
+                continue;
+            }if( num >= 100){
+                sb.append("C");
+                num = num - 100;
+                continue;
+            }if(num >= 90){
+                sb.append("XC");   
+                num = num - 90;
+                continue;
+            }if(num >= 50){
+                sb.append("L");
+                num = num - 50;
+                continue;
+            }if(num >=40){
+                sb.append("XL");
+                num = num - 40;
+                continue;
+            }if(num>=10){
+                sb.append("X");
+                num = num - 10;
+                continue;
+            }if(num>=9){
+                sb.append("IX");
+                num = num - 9;
+                continue;
+            }if(num>=5){
+                sb.append("V");
+                num = num - 5;
+                continue;
+            }if(num>=4){
+                sb.append("IV");
+                num = num - 4;
+                continue;
+            }if(num>=1){
+                sb.append("I");
+                num = num - 1;
+                continue;
+            }
+        }
+        
+        return sb.toString();
+    }
+
+    // https://leetcode.com/problems/game-of-life/
+    public void gameOfLife(int[][] board) {
+        int[][] temp = new int[board.length][board[0].length];
+        
+        for(int i = 0; i<board.length; i++){
+            for(int j = 0; j<board[0].length; j++){
+                temp[i][j] = 0;
+                if(i > 0) temp[i][j] += board[i-1][j];
+                if(j > 0) temp[i][j] += board[i][j-1];
+                if(i < board.length-1) temp[i][j] += board[i+1][j];
+                if(j < board[0].length-1) temp[i][j] += board[i][j+1];
+                if(i > 0 && j > 0) temp[i][j] += board[i-1][j-1];
+                if(i > 0 && j < board[0].length-1) temp[i][j] += board[i-1][j+1];
+                if(i < board.length-1 && j < board[0].length-1) temp[i][j] += board[i+1][j+1];
+                if(i < board.length-1 && j > 0 ) temp[i][j] += board[i+1][j-1];
+            }
+        }
+        
+        for(int i = 0; i<board.length; i++){
+            for(int j = 0; j<board[0].length; j++){
+                if(board[i][j] == 1){
+                    if(temp[i][j] < 2) board[i][j] = 0;
+                    else if(temp[i][j] == 2 || temp[i][j] == 3) board[i][j] = 1;
+                    else board[i][j] = 0;
+                }else if(temp[i][j] == 3) board[i][j] = 1;
+            }
+        }
+    }
+
+    // https://leetcode.com/problems/spiral-matrix-ii/
+    public int[][] generateMatrix(int n) {
+        int[][] result = new int[n][n];
+        
+        int length = 0;
+        int offset = 0;
+        int value = 0;
+        while(offset <= n/2){
+            for(int a=offset; a<n-offset; a++){
+                result[offset][a] = ++value;
+                if(offset == n/2) return result;
+            }
+            for(int a = offset+1; a<n-offset-1; a++){
+                result[a][n-offset-1] = ++value;
+            }
+            for(int a = n-offset-1; a>=offset; a--){
+                result[n-offset-1][a] = ++value;
+            }
+            for(int a = n-offset-2; a>offset; a--){
+                result[a][offset] = ++value; 
+            }
+            
+            offset++;
+        }
+        
+        return result;
+    }
 }
