@@ -1,13 +1,8 @@
 package algorithms.arrays;
 
-import java.util.Arrays;
 
 public class BinarySearch {
     public static int binarySearchIterative(int[] arr, int left, int right, int target){
-        //Arrays.sort(arr);
-        // int left = 0;
-        // int right = arr.length-1;
-
         while(left<=right){     
             int mid = left + (right-left)/2;
 

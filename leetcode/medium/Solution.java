@@ -1,4 +1,4 @@
-package problems.leetcode.medium;
+package leetcode.medium;
 
 import java.util.List;
 import java.util.ArrayList;

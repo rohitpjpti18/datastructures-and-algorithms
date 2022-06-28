@@ -1,4 +1,4 @@
-package problems.leetcode.easy;
+package leetcode.easy;
 
 public class Runner {
     public static void main(String[] args){

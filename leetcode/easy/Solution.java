@@ -1,4 +1,4 @@
-package problems.leetcode.easy;
+package leetcode.easy;
 
 import java.math.BigInteger;
 import java.util.ArrayDeque;
