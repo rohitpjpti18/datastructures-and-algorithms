@@ -1,6 +1,6 @@
 # Set Zero Matrix | [Leetcode](https://leetcode.com/problems/set-matrix-zeroes/)
 
-[Back to Interview Preparation](../../InterviewPreparation.md)
+&larr; [Back to Interview Preparation](../../InterviewPreparation.md)
 
 Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
 
@@ -89,3 +89,5 @@ public static void setZeroes(int[][] matrix){
     }
 }
 ```
+
+&larr; [Back to Interview Preparation](../../InterviewPreparation.md)
