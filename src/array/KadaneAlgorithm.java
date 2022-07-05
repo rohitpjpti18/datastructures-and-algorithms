@@ -1,4 +1,4 @@
-package problems.array;
+package src.array;
 
 public class KadaneAlgorithm {    
     /* 

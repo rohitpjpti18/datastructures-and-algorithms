@@ -1,4 +1,4 @@
-package problems.array;
+package src.array;
 
 public class NextPermutation {
     public void swap(int[] nums, int a, int b){
