@@ -26,6 +26,7 @@ public class PascalTriangle {
         return result;
     }
 
+    
     public List<Integer> getRow(int rowIndex) {
         List<Integer> temp = new ArrayList<>();
         temp.add(1);
