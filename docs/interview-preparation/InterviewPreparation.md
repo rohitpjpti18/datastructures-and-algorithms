@@ -16,4 +16,4 @@
 
 | Question                      | Difficulty | Status | Last Solved On    | Topics  | 
 | -----------------             |-----       |-----   | -----------       | ------  |
-| [Search a 2d Matrix](./common-problems/arrays2/SearchInA2dMatrix.md)               | Medium     | :heavy_cross_mark:  | -      | Array, Binary Search, Matrix
+| [Search a 2d Matrix](./common-problems/arrays2/SearchInA2dMatrix.md)               | Medium     | :x:  | -      | Array, Binary Search, Matrix
