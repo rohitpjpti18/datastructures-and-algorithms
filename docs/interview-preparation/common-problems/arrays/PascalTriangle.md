@@ -1,5 +1,8 @@
 # Pascal's Triangle | [Leetcode](https://leetcode.com/problems/pascals-triangle/)
 
+
+&larr; [Back to Interview Preparation](../../InterviewPreparation.md)
+
 Given an integer numRows, return the first numRows of Pascal's triangle.
 
 In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
@@ -71,3 +74,6 @@ public List<Integer> getRow(int rowIndex) {
     return temp;
 }
 ```
+
+
+&larr; [Back to Interview Preparation](../../InterviewPreparation.md)

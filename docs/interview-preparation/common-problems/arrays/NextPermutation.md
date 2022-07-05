@@ -1,5 +1,8 @@
 # Next Permutation | [Leetcode](https://leetcode.com/problems/next-permutation/)
 
+
+&larr; [Back to Interview Preparation](../../InterviewPreparation.md)
+
 A permutation of an array of integers is an arrangement of its members into a sequence or linear order.
 
 ```
@@ -68,3 +71,5 @@ public void nextPermutation(int[] nums) {
     reverse(nums, a+1, n-1);
 }
 ```
+
+&larr; [Back to Interview Preparation](../../InterviewPreparation.md)

@@ -1,6 +1,9 @@
 
 # Maximum Subarray Sum | [Leetcode](https://leetcode.com/problems/maximum-subarray/)
 
+
+&larr; [Back to Interview Preparation](../../InterviewPreparation.md)
+
 Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 
 A subarray is a contiguous part of an array.
@@ -91,3 +94,5 @@ public int maxMidSum(int[] nums, int left, int mid, int right){
     );
 }
 ```
+
+&larr; [Back to Interview Preparation](../../InterviewPreparation.md)
