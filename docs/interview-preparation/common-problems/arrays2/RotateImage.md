@@ -1,4 +1,4 @@
-# Sort Colors | [Leetcode](https://leetcode.com/problems/sort-colors/)
+# Rotate Image | [Leetcode](https://leetcode.com/problems/rotate-image/)
 
 &larr; [Back to Interview Preparation](../../InterviewPreparation.md)
 
